@@ -1,0 +1,164 @@
+<div class="row">
+    <div class="small-4 columns">
+        Posts
+    </div>
+    <div class="small-2 columns text-right">
+        Search
+    </div>
+    <div class="small-6 columns"
+         style="position: relative;">
+        <div class="row collapse">
+            <form name="postsList.searchForm">
+
+                <div class="small-8 columns">
+                    <input type="text"
+                           name="postsList.searchForm.term"
+                           ng-model="postsList.searchTerm"
+                           ng-model-options="{
+                            'updateOn': 'default blur',
+                            'debounce': {
+                                'default': 250,
+                                'blur': 0
+                            }
+                        }"/>
+                </div>
+                <div class="small-2 columns">
+                    <button class="postfix" ng-click="postsList.search()">
+                        Go
+                    </button>
+                </div>
+                <div class="small-2 columns">
+                    <button class="postfix" ng-click="postsList.clearSearch()">
+                        X
+                    </button>
+                </div>
+
+            </form>
+        </div>
+        <div class="row collapse"
+             style="max-height: 200px; overflow-y: auto; position: absolute; background-color: #fff; z-index: 100;"
+             ng-show="postsList.searchTerm">
+            <div class="small-12 columns">
+                <small>fader måske bare ud via animate efter lidt tid?</small>
+                <p ng-show="postsList.searchResults.titles.length < 1 && postsList.searchResults.tags.length < 1">
+                    No titles or tags
+                </p>
+                <p ng-show="postsList.searchResults.titles.length > 0 && postsList.searchResults.tags.length < 1">
+                    No tags but titles
+                </p>
+                <p ng-show="postsList.searchResults.titles.length < 1 && postsList.searchResults.tags.length > 0">
+                    No titles but tags
+                </p>
+                <div ng-show="postsList.searchResults.titles.length > 0">
+                   <p>Titles matching {{postsList.searchTerm}}</p>
+                    <ul>
+                        <li ng-repeat="post in postsList.searchResults.titles">
+                            <div>
+                                <span>Match:</span>
+                                <span ng-bind-html="post.string"></span>
+                            </div>
+                            <div>
+                                <a ui-sref="application.posts.single({slug: post.original.slug})">{{post.original.title}}</a>
+                            </div>
+                            <hr/>
+                        </li>
+                    </ul>
+                </div>
+
+                <div ng-show="postsList.searchResults.tags.length > 0">
+                    <p>Tags matching {{postsList.searchTerm}}</p>
+                    <ul>
+                        <li ng-repeat="post in postsList.searchResults.tags">
+                            <div>
+                                <span>Match:</span>
+                                <ul>
+                                    <li ng-repeat="tag in post">
+                                        <span ng-bind-html="tag.string"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <a ui-sref="application.posts.single({slug: post[0].original.slug})">{{post[0].original.title}}</a>
+                            </div>
+                            <hr/>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 columns">
+        <ul class="inline-list">
+            <li>
+                <button class="small" ng-click="postsList.setCategory('all')">
+                    All
+                </button>
+            </li>
+            <li ng-repeat="category in postsList.listCategories track by $index">
+                <button class="small" ng-click="postsList.setCategory(category)">
+                    {{category}}
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 columns">
+        <ul class="no-bullet">
+            <li ng-repeat="post in postsList.list track by post.uri">
+                <a ui-sref="application.posts.single({category: post.category, slug: post.slug})">
+                    <div class="row collapse">
+                        <div class="small-8 columns">
+                            <h2>{{post.title}}</h2>
+                        </div>
+                        <div class="small-4 columns">
+                            <p>
+                                {{post.category}}
+                            </p>
+                        </div>
+                        <div class="small-6 columns">
+                            <p>
+                                <small>
+                                    {{post.published}}
+                                </small>
+                            </p>
+                        </div>
+                        <div class="small-6 columns">
+                            <ul class="inline-list">
+                                <li ng-repeat="tag in post.tags track by $index">
+                                    <small>
+                                        {{tag}}
+                                    </small>
+                                </li>
+                            </ul>
+                        </div>
+                        <hr/>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="small-12 columns">
+        <div class="row collapse">
+            <div class="small-4 columns text-left">
+                <button ng-click="postsList.prevPage()" ng-disabled="postsList.prevPageDisabled()">
+                    Previous page
+                </button>
+            </div>
+            <div class="small-4 columns text-center">
+                <p>
+                    Page {{postsList.currentPage + 1}} of {{postsList.pagination.totalPages + 1}}
+                </p>
+            </div>
+            <div class="small-4 columns text-right">
+                <button ng-click="postsList.nextPage()" ng-disabled="postsList.nextPageDisabled()">
+                    Next page
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

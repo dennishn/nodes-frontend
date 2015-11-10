@@ -1,0 +1,76 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>nodes-frontend</title>
+        <base href="/">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="common/lib/highlightjs/tomorrow-night-eighties.css"/>
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+    </head>
+    <body ng-app="nodes-frontend">
+
+        <n-messages-wrapper></n-messages-wrapper>
+
+        <h1>nodes-frontend</h1>
+
+        <!-- Application Entry: -->
+        <div ui-view="root"></div>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-XXXXX-X');
+            // We use an angular module to track "page" views.
+            //ga('send', 'pageview');
+        </script>
+
+        <!-- build:js(.) scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-foundation/mm-foundation-tpls.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower_components/angulartics/src/angulartics.js"></script>
+        <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
+        <script src="bower_components/moment/moment.js"></script>
+        <script src="bower_components/angular-moment/angular-moment.js"></script>
+        <script src="bower_components/ng-lodash/build/ng-lodash.js"></script>
+        <script src="bower_components/marked/lib/marked.js"></script>
+        <script src="bower_components/angular-marked/angular-marked.js"></script>
+        <script src="bower_components/fuzzy/lib/fuzzy.js"></script>
+        <!-- endbower -->
+        <script src="common/lib/highlightjs/highlight.pack.js"></script>
+        <!-- endbuild -->
+
+		<!-- build:js(app) scripts/scripts.js -->
+		<script src="config/app.js"></script>
+		<script src="config/config.js"></script>
+		<script src="modules/_application/application.module.js"></script>
+		<script src="modules/_application/application.route.js"></script>
+		<script src="modules/_application/application.controller.js"></script>
+		<script src="modules/index/index.module.js"></script>
+		<script src="modules/index/index.route.js"></script>
+		<script src="modules/index/index.controller.js"></script>
+		<script src="models/Post/Posts.module.js"></script>
+		<script src="models/Post/Post.factory.js"></script>
+		<script src="models/Post/Posts.service.js"></script>
+		<script src="modules/posts/posts.module.js"></script>
+		<script src="modules/posts/posts.route.js"></script>
+		<script src="modules/posts/posts.controller.js"></script>
+		<script src="modules/posts/single/single.controller.js"></script>
+		<script src="common/filters/offset/offset.module.js"></script>
+		<script src="common/filters/offset/offset.filter.js"></script>
+		<script src="modules/posts/list/list.controller.js"></script>
+		<!-- endbuild -->
+</body>
+</html>
